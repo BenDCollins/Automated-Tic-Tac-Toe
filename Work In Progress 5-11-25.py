@@ -11,14 +11,13 @@ def start_rule_ask(start_rules):
         start_rule_ask(start_rules)
 
 def rules_tutorial():
-    print("\n\n\n\t\t\t\tRules Tutorial:")
+    print("\n\n\t\t\t\tRules Tutorial:")
     print("\nThe rules of Tic-Tac-Toe are rather simple. The goal is to make a straight line out of three symbols in a row.")
-    print("You, the player, will either choose to take the first turn or the second.")
+    print("You, the player, will either choose to take the first turn or the second, or have the turn order randomly selected.")
     print("After this you and the program will alternate placing symbols on a 3x3 grid.")
     print("The first one to create a straight line of three symbols in the grid wins!")
     print("Each space will correspont to a number-letter coordinate pair.")
     print("\nHere is what the game board will look like\n")
-    print("\nHere is the game board!\n")
     print("\t\t\t\t\t\t    1      2     3 \n")
     print("\t\t\t\t\t\t        #     #     ")
     print("\t\t\t\t\t\tA       #     #     ")
@@ -40,10 +39,12 @@ def symbol_picker_x():
     global variable_x
     variable_x = input("\n\t\t\t\tPlease enter the symbol to use for X: ")
     if (len(variable_x) != 1):
-        print("Enter exactly one (1) character to use for the symbol.")
+        print("\nPlease enter exactly one (1) character to use for the symbol.")
         symbol_picker_x()
     elif (variable_x == "X"):
         print("Now why exactly would you go through all that trouble just to do that? Ok then...")
+        return variable_x
+    else:
         return variable_x
 
 
@@ -51,13 +52,12 @@ def symbol_picker_o():
     global variable_o
     variable_o = input("\n\t\t\t\tPlease enter the symbol to use for O: ")
     if (len(variable_o) != 1):
-        print("Enter exactly one (1) character to use for the symbol.")
+        print("\nPlease enter exactly one (1) character to use for the symbol.")
         symbol_picker_o()
     elif (variable_o == "O" and variable_x == "X"):
         print("Well now you're just being cheeky.")
         return variable_o
-    elif (variable_o == "O"):
-        print("Now why exactly would you go through all that trouble just to do that? Ok then...")
+    else:
         return variable_o
  
 def symbol_w_redo():
@@ -65,7 +65,7 @@ def symbol_w_redo():
     global variable_o
     variable_x = symbol_picker_x()
     variable_o = symbol_picker_o()
-    print(f"\t\t\t\tYour chosen variables are {variable_x} and {variable_o}.")
+    print(f"\n\t\t\t\tYour chosen variables are {variable_x} and {variable_o}.")
     redo_ask = input("If you are happy with these selections, click enter to continue, if not enter \"REDO\": ")
     if (redo_ask == "REDO"):
         symbol_w_redo()
@@ -339,7 +339,8 @@ def turn_generator():
             print(line_11)
             print(line_12)
             turn_num += 1
-            
+    win_sequence(3)
+
 def x_or_o():
     global variable_x
     global variable_o
@@ -396,9 +397,11 @@ def symbol_ask():
     if (custom_ask == "CUSTOM"):
         symbol_w_redo()
         game()
-    else:
+    elif (custom_ask == ""):
         game()
-
+    else:
+        print("\nPlease either hit enter or type CUSTOM if you wish to create custom symbols for this game: ")
+        symbol_ask()
 
 turn_num = 0    
 
@@ -438,4 +441,3 @@ print("If you would like a quick explaination of the rules for this game, please
 start_rules = input("\n\t\t\t\tHow would you like to proceed? : ")
 
 start_rule_ask(start_rules)
-
